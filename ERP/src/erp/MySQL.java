@@ -58,6 +58,39 @@ public class MySQL {
        return resultSet;
    }
    
+   public ResultSet searchValues(String table_name, String Query){
+       ResultSet resultSet=null;
+       try{
+           Statement st = Conexion.createStatement();
+           resultSet = st.executeQuery(Query);
+       }
+       catch(SQLException ex){
+           JOptionPane.showMessageDialog(null,"Error adquiriendo datos: " + ex);
+       }
+       return resultSet;
+   }
+   
+   public void insertData( String Query){
+       try{
+           Statement st = Conexion.createStatement();
+           st.executeUpdate(Query);
+           JOptionPane.showMessageDialog(null, "Datos almacenados");
+       }
+       catch(SQLException ex){
+           JOptionPane.showMessageDialog(null, "Error en la intoduccion de datos "+ ex);
+       }
+   }
+   
+   public void deleteRecord(String Query){
+       try{
+           Statement st = Conexion.createStatement();
+           st.executeUpdate(Query);
+       }
+        catch(SQLException ex){
+           JOptionPane.showMessageDialog(null, "Error en la eliminacion de datos "+ ex);
+       }
+   }
+   
    public boolean isConnected(){
        if(Conexion!=null){
            return true;
