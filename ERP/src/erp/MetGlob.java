@@ -26,6 +26,12 @@ public class MetGlob {
         rs = db.getValues(tabla);
         return rs;
     }
+    
+    public ResultSet consultaJoin(){
+        ResultSet rs;
+        rs = db.getValuesJoin();
+        return rs;
+    }
    
     public ResultSet buscarConsulta(String tabla, String Query){
         ResultSet rs;
@@ -87,6 +93,39 @@ public class MetGlob {
         }
     }
     
+    public void addFila(ResultSet rs, JTable jTable,DefaultTableModel modelo){
+        
+        try{
+            while(rs.next()){
+                int numCol = rs.getMetaData().getColumnCount();
+                Object [] fila = new Object[numCol];
+                for(int i=0; i<numCol; i++){
+                fila[i] = rs.getObject(i+1);
+                }
+                modelo.addRow(fila);
+            }
+        }
+        catch(Exception sqle){
+            System.out.println("Error sql2: "+ sqle);
+        }
+    }
+    
+    public String[] getRsString(ResultSet rs){
+        String[] datos= new String[5];
+        try{
+            while(rs.next()){
+                datos[0]=rs.getString("productoID");
+                datos[1]=rs.getString("nombre");
+                datos[2]=rs.getString("pvp");
+            }
+        }
+        catch(Exception sqle){
+            System.out.println("Error sql2: "+ sqle);
+        }
+        return datos;
+    }
+    
+    
     public void setComboBox(ResultSet rs,javax.swing.JComboBox<String> jComboBox1,DefaultComboBoxModel CBModel){
         try{
             ResultSetMetaData cabecera = rs.getMetaData();
@@ -104,6 +143,7 @@ public class MetGlob {
             System.out.println("Error sql3: "+ sqle);
         }
     }
+    
     
    /* public void consultar(ResultSet rs, javax.swing.JTable jTable){
         modelo = new JTModelo();

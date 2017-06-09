@@ -40,6 +40,9 @@ public class ERPMain extends javax.swing.JFrame {
         JPProveedores jprov = new JPProveedores();
         jTabbedPane.addTab("Proveedores", jprov);
         
+        JPPedidos jpedi = new JPPedidos();
+        jTabbedPane.addTab("Pedidos", jpedi);
+        
        
     }
     @SuppressWarnings("unchecked")

@@ -58,6 +58,19 @@ public class MySQL {
        return resultSet;
    }
    
+   public ResultSet getValuesJoin(){
+       ResultSet resultSet=null;
+       try{
+           String Query = "SELECT * FROM compras a JOIN detallescompra b ON a.compraID = b.compraID";
+           Statement st = Conexion.createStatement();
+           resultSet = st.executeQuery(Query);
+       }
+       catch(SQLException ex){
+           JOptionPane.showMessageDialog(null,"Error adquiriendo datos: " + ex);
+       }
+       return resultSet;
+   }
+   
    public ResultSet searchValues(String table_name, String Query){
        ResultSet resultSet=null;
        try{
